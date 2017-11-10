@@ -1,9 +1,8 @@
 <!--
-- ??? Select the input device combo?
-- Create a chart to show the decibilimeter
-- Create a variable to define the value to achieve when the crowd scream
-- create a simple blog with dummy posts
-- Integrate with WP REST API to post trigger and somehing
+OK - Create a chart to show the decibilimeter
+OK - Create a variable to define the value to achieve when the crowd scream
+OK - create a simple blog with dummy posts
+OK - Integrate with WP REST API to post trigger and somehing
 - the post that will be created needs to have the informations about the event and dB achieved for the crowd.
 - when achive the meta explode the element and show a message "POST PUBLISHED!"
 
@@ -16,14 +15,13 @@
  -->
 
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <title></title>
-  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="assets/styles/post-scream.css" />
+  <link rel="stylesheet" href="/scripts/bootstrap/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/scripts/css/post-scream.css" />
 </head>
 <body>
   <div class="row content">
@@ -42,7 +40,7 @@
           <div class="form-group">
           <input type="button" class="btn btn-success" value="Start listen" onclick="startListening();" />
           <input type="button" class="btn btn btn-danger" value="Stop listen" onclick="stopListening();" />
-          <input type="button" class="btn btn btn-secondary" value="Clear" />
+          <input type="button" class="btn btn btn-secondary" value="Clear" onclick="clearLiveResults();" />
         </div>
         <div class="form-group">
           <label for="results">Live Results</label>
@@ -52,70 +50,10 @@
     </div>
   </div>
 
-  <script src="node_modules/jquery/dist/jquery.min.js"></script>
-  <script src="node_modules/jquery-ui-npm/jquery-ui.min.js"></script>
-  <script src="node_modules/decibel-meter/dist/decibel-meter.js"></script>
-  <script>
-    const meter      = new DecibelMeter('meter');
-    const levelEl    = $('#meter > span');
-    const dbGoalEl   = $('#db-goal');
-    const resultsEl  = $('#results');
-    const higherDbEl = $('#higher-db');
-
-    function startListening() {
-      var appendDb = '';
-      var higherDb = 0;
-      connectToSource();
-      meter.listen();
-      meter.on('sample', (dB, percent, value) => {
-        dB = dB + 100; // convert to positive value
-
-        if ( value >= dbGoalEl.val()) {
-
-          if ( dB > higherDb){
-            higherDb = dB;
-            higherDbEl.css('bottom', higherDb + '%');
-            higherDbEl.find('span').text(Math.round(higherDb) + 'dB');
-            // console.log('higher: ' + higherDb);
-          }
-
-
-        levelEl.css('height', Math.round(dB) + '%');
-        levelEl.text( Math.round(dB) + '%');
-
-         //  $( "#meter" ).effect('explode', {pieces: 32}, 3000, function() {
-         //     $(this).show()
-         // });
-        }
-
-
-        resultsEl.append(dB + 'dB' + '\n');
-        resultsEl.scrollTop(resultsEl[0].scrollHeight);
-
-        // console.log(`${dB} dB`);
-        // console.log(`${percent} %`);
-        // console.log(`${value} val`);
-        // console.log('-----------------------');
-
-      });
-    }
-
-    function stopListening() {
-      meter.stopListening();
-      // diconnectToSource();
-    }
-
-    function connectToSource() {
-      meter.sources.then(sources => {
-          meter.connect(sources[0])
-      });
-    }
-
-    function diconnectToSource() {
-      meter.disconnect();
-    }
-
-  </script>
-
+  <script src="/scripts/jquery/dist/jquery.min.js"></script>
+  <script src="/scripts/decibel-meter/dist/decibel-meter.js"></script>
+  <script src="/scripts/js/decibel-control.js"></script>
+  <script src="/scripts/js/base64.js"></script>
+  <script src="/scripts/js/wp-rest.js"></script>
 </body>
 </html>
