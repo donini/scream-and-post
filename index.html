@@ -3,8 +3,19 @@ OK - Create a chart to show the decibilimeter
 OK - Create a variable to define the value to achieve when the crowd scream
 OK - create a simple blog with dummy posts
 OK - Integrate with WP REST API to post trigger and somehing
-- the post that will be created needs to have the informations about the event and dB achieved for the crowd.
-- when achive the meta explode the element and show a message "POST PUBLISHED!"
+OK - the post that will be created needs to have the informations about the event and dB achieved for the crowd.
+OK - when achive the meta explode the element and show a message "POST PUBLISHED!"
+change the input value for db
+
+
+180 dB: Decolagem de foguete
+140 dB: Motor à jato em movimento
+120 dB: Banda de rock
+110 dB: Trovoadas altas
+90 dB:Tráfego urbano
+80 dB: rádio no volume  bem alto
+60 dB. Conversaão normal
+30 dB: Susurro suave
 
 ****************
 
@@ -12,6 +23,10 @@ OK - Integrate with WP REST API to post trigger and somehing
 - references, libs, ideas, prototypes
 - how to use rest api
 - application for the rest api
+- tell that the built in mic is not so good then a decibilimiter
+- show the code
+- show live post
+- 
  -->
 
 
@@ -24,6 +39,12 @@ OK - Integrate with WP REST API to post trigger and somehing
   <link rel="stylesheet" href="/scripts/css/post-scream.css" />
 </head>
 <body>
+  <div class="overlay">
+    <div class="center">
+      <h1>Congrats WordCamp Sampa!</h1>
+      <h2>You did it!</h2>
+    </div>
+  </div>
   <div class="row content">
     <div class="col-md-9 chart">
       <div id="higher-db"><span></span></div>
@@ -38,9 +59,9 @@ OK - Integrate with WP REST API to post trigger and somehing
         </div>
         <h3>Actions</h3>
           <div class="form-group">
-          <input type="button" class="btn btn-success" value="Start listen" onclick="startListening();" />
-          <input type="button" class="btn btn btn-danger" value="Stop listen" onclick="stopListening();" />
-          <input type="button" class="btn btn btn-secondary" value="Clear" onclick="clearLiveResults();" />
+          <input type="button" class="btn btn-sm btn-success" value="Start listen" onclick="startListening();" />
+          <input type="button" class="btn btn-sm btn btn-danger" value="Stop listen" onclick="stopListening();" />
+          <input type="button" class="btn btn-sm btn btn-secondary" value="Clear" onclick="clearLiveResults();" />
         </div>
         <div class="form-group">
           <label for="results">Live Results</label>

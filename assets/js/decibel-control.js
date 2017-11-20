@@ -3,8 +3,9 @@ const levelEl       = $('#meter > span');
 const dbGoalEl      = $('#db-goal');
 const resultsEl     = $('#results');
 const higherDbEl    = $('#higher-db');
+const overlay       = $('.overlay');
 
-function startListening() {
+var startListening = function() {
   var appendDb = '';
   var higherDb = 0;
   connectToSource();
@@ -18,14 +19,15 @@ function startListening() {
         higherDb = dB;
         higherDbEl.css('bottom', higherDb + '%');
         higherDbEl.find('span').text(Math.round(higherDb) + 'dB');
-        publishPost();
+        showExplosion();
+        publishPost(higherDb);
         stopListening();
       }
 
-      levelEl.css('height', Math.round(dB) + '%');
-      levelEl.text( Math.round(dB) + '%');
-
     }
+
+    levelEl.css('height', Math.round(dB) + '%');
+    levelEl.text( Math.round(dB) + '%');
 
     resultsEl.append(Math.round(dB) + 'dB' + '\n');
     resultsEl.scrollTop(resultsEl[0].scrollHeight);
@@ -38,25 +40,36 @@ function startListening() {
   });
 }
 
-function clearLiveResults() {
+var showExplosion = function() {
+  if(overlay.is(':visible'))
+    overlay.fadeOut('fast');
+  else
+    overlay.fadeIn('fast');
+}
+
+var clearLiveResults = function() {
   resultsEl.empty();
 }
 
-function stopListening() {
+var stopListening = function () {
   if (meter.listening) {
     meter.stopListening();
     diconnectToSource();
     }
 }
 
-function connectToSource() {
+var connectToSource = function() {
   meter.sources.then(sources => {
       meter.connect(sources[0]);
   });
 }
 
-function diconnectToSource() {
+var diconnectToSource = function() {
   if (meter.connected) {
     meter.disconnect();
   }
 }
+
+overlay.click(function(e) {
+  showExplosion();
+});
