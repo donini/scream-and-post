@@ -13,7 +13,8 @@ var startListening = function() {
   meter.on('sample', (dB, percent, value) => {
     dB = dB + 100; // convert to positive value
 
-    if ( value >= dbGoalEl.val()) {
+
+    if ( dB >= dbGoalEl.val()) {
 
       if ( dB > higherDb){
         higherDb = dB;
