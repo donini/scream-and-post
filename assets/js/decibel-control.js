@@ -4,6 +4,51 @@ const dbGoalEl      = $('#db-goal');
 const resultsEl     = $('#results');
 const higherDbEl    = $('#higher-db');
 const overlay       = $('.overlay');
+const animation     = $('img.photo');
+
+
+
+/**
+ * CAMERA CONTROL
+ */
+
+
+ 
+var takeShot = function( higherDb ) {
+  $.getJSON( "../../config", function( data ) {
+    var restInfo = data;
+    var mediaUrl   = data.mediaUrl;
+    var username = data.credentials.username;
+    var password = data.credentials.password;
+
+    gifshot.createGIF({
+      gifWidth: 640,
+      gifHeight: 480,
+      interval: 0.1,
+      numFrames: 5,
+      frameDuration: 1,
+      text: 'WordCamp Miami 2018',
+      fontWeight: 'normal',
+      fontSize: '16px',
+      fontFamily: 'sans-serif',
+      fontColor: '#ffffff',
+      textAlign: 'center',
+      textBaseline: 'bottom',
+      sampleInterval: 10,
+      numWorkers: 2
+    }, function (obj) {
+        if (!obj.error) {
+            var image = obj.image, animatedImage = document.createElement('img');
+            animation.attr( 'src', image) ;
+            // document.body.appendChild(animatedImage);
+            uploadImage( image, mediaUrl, username, password, higherDb );
+        }
+    });
+
+  });
+}
+
+
 
 var startListening = function() {
   var appendDb = '';
@@ -20,8 +65,9 @@ var startListening = function() {
         higherDb = dB;
         higherDbEl.css('bottom', higherDb + '%');
         higherDbEl.find('span').text(Math.round(higherDb) + 'dB');
+        takeShot( higherDb );
         showExplosion();
-        publishPost(higherDb);
+        // publishPost(higherDb);
         stopListening();
       }
 

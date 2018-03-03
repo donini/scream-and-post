@@ -15,16 +15,16 @@
     </div>
   </div>
   <div class="row content">
-    <div class="col-md-9 chart">
+    <div class="col-md-6 chart">
       <div id="higher-db"><span></span></div>
       <div id="meter"><span></span></div>
     </div>
-    <div class="col-md-3 dashboard">
+    <div class="col-md-6 dashboard">
       <div class="buttons">
         <h3>Goal</h3>
         <div class="input-group form-group">
           <span class="input-group-addon" id="basic-addon1">dB</span>
-          <input type="text" class="form-control" name="db-goal" id="db-goal" value="50">
+          <input type="text" class="form-control" name="db-goal" id="db-goal" value="5">
         </div>
         <h3>Actions</h3>
           <div class="form-group">
@@ -36,12 +36,17 @@
           <label for="results">Live Results</label>
           <textarea class="form-control" id="results"></textarea>
         </div>
+        <h3>Picture Taken</h3>
+        <center>
+          <img src="" alt="" class="photo" width="100%" height="auto">
+        </center>
       </div>
     </div>
   </div>
 
   <script src="/scripts/jquery/dist/jquery.min.js"></script>
   <script src="/scripts/decibel-meter/dist/decibel-meter.js"></script>
+  <script src="/scripts/js/gifshot.min.js"></script>
   <script src="/scripts/js/decibel-control.js"></script>
   <script src="/scripts/js/base64.js"></script>
   <script src="/scripts/js/wp-rest.js"></script>
