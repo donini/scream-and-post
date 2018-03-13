@@ -12,8 +12,6 @@ const animation     = $('img.photo');
  * CAMERA CONTROL
  */
 
-
- 
 var takeShot = function( higherDb ) {
   $.getJSON( "../../config", function( data ) {
     var restInfo = data;
@@ -40,7 +38,6 @@ var takeShot = function( higherDb ) {
         if (!obj.error) {
             var image = obj.image, animatedImage = document.createElement('img');
             animation.attr( 'src', image) ;
-            // document.body.appendChild(animatedImage);
             uploadImage( image, mediaUrl, username, password, higherDb );
         }
     });
@@ -48,16 +45,13 @@ var takeShot = function( higherDb ) {
   });
 }
 
-
-
 var startListening = function() {
   var appendDb = '';
   var higherDb = 0;
   connectToSource();
   meter.listen();
   meter.on('sample', (dB, percent, value) => {
-    dB = dB + 100; // convert to positive value
-
+    dB = dB + 100; 
 
     if ( dB >= dbGoalEl.val()) {
 
@@ -67,7 +61,6 @@ var startListening = function() {
         higherDbEl.find('span').text(Math.round(higherDb) + 'dB');
         takeShot( higherDb );
         showExplosion();
-        // publishPost(higherDb);
         stopListening();
       }
 

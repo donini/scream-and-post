@@ -1,3 +1,9 @@
+/**
+ * Publish a post using the WP REST API 
+ * @param {Decibel value} higherDb 
+ * @param {Photo taken} imageTaken 
+ */
+
 function publishPost( higherDb, imageTaken ) {
   $.getJSON( "../../config", function( data ) {
     var restInfo = data;
@@ -34,7 +40,14 @@ function publishPost( higherDb, imageTaken ) {
   });
 }
 
-
+/**
+ * Upload an image to WordPress media library using WP REST API
+ * @param {The image to updalod} image 
+ * @param {WP REST API URL} apiUrl 
+ * @param {WP REST API Username} username 
+ * @param {WP REST API Password} password 
+ * @param {Decibel value} higherDb 
+ */
 function uploadImage( image, apiUrl, username, password, higherDb ) {
 
   var file = image;
